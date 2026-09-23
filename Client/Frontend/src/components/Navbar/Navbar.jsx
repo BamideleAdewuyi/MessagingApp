@@ -15,6 +15,7 @@ function Navbar({ user, setUser }) {
                  </> : 
                  <>
                  <Link className="link" to="/login">Log In</Link>
+                 <Link className="link" to="/createAccount">Create Account</Link>
                  </> }
             </nav>
         </>

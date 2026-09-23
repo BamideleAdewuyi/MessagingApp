@@ -2,7 +2,7 @@ import App from '../../App'
 import { createBrowserRouter } from 'react-router'
 import Homepage from '../Homepage/Homepage'
 import LogIn from '../LogIn/LogIn'
-
+import CreateAccount from '../CreateAccount/CreateAccount'
 
 const router = createBrowserRouter([
   {
@@ -11,6 +11,7 @@ const router = createBrowserRouter([
     children: [
         {path: "/", element: <Homepage />},
         {path: "/logIn", element: <LogIn />},
+        {path: "/createAccount", element: <CreateAccount />}
     ]
   }
 ])

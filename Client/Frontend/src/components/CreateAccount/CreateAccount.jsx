@@ -1,4 +1,5 @@
 import styles from "./CreateAccount.module.css"
+import Error from "../Error/Error"
 
 function CreateAccount() {
     return(

@@ -20,10 +20,7 @@ function CreateAccount() {
             headers: { "content-type": "application/json" },
             body: JSON.stringify(userObj)
         })
-        if (!res.ok) {
-                throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        
+
         const data = await res.json();
 
         if (data.msg) {
@@ -40,7 +37,7 @@ function CreateAccount() {
 
     return(
         <div className={styles.createAccountContainer}>
-            <form>
+            <form onSubmit={addUser}>
                 <label htmlFor="username">Username</label>
                 <input type="text" name="username" value={username} onChange={e => setUsername(e.target.value)}/>
                 <label htmlFor="password">Password</label>

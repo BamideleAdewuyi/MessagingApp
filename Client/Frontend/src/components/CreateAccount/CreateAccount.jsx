@@ -42,11 +42,11 @@ function CreateAccount() {
         <div className={styles.createAccountContainer}>
             <form>
                 <label htmlFor="username">Username</label>
-                <input type="text" name="username" />
+                <input type="text" name="username" value={username} onChange={e => setUsername(e.target.value)}/>
                 <label htmlFor="password">Password</label>
-                <input type="password" name="password" />
+                <input type="password" name="password" value={password} onChange={e => setPassword(e.target.value)}/>
                 <label htmlFor="confirmPassword">Confirm Password</label>
-                <input type="password" name="confirmPassword" />
+                <input type="password" name="confirmPassword" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)}/>
                 <button type="submit">Create Account</button>
             </form>
             {errors.length > 0 && 

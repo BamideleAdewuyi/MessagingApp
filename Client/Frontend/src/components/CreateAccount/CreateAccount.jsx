@@ -6,6 +6,9 @@ import { useNavigate } from "react-router"
 function CreateAccount() {
 
     const [errors, setErrors] = useState([]);
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
     const navigate = useNavigate();
 
     async function addUser(e) {

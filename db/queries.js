@@ -5,7 +5,6 @@ async function createNewUser({ username, password }) {
         data: {
             username: username,
             password: password,
-            admin: false,
         }
     });
     return user;

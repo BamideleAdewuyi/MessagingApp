@@ -3,6 +3,9 @@ import Error from "../Error/Error"
 import { useState } from "react"
 
 function CreateAccount() {
+
+    const [errors, setErrors] = useState([]);
+
     return(
         <div className={styles.createAccountContainer}>
             <form>
@@ -14,6 +17,14 @@ function CreateAccount() {
                 <input type="password" name="confirmPassword" />
                 <button type="submit">Create Account</button>
             </form>
+            {errors.length > 0 && 
+            <>
+            <ul>
+                {errors.map((error, index) => (
+                        <li key={index}><Error error={error} /></li>
+                    ))}
+            </ul>
+            </> }
         </div>
     )
 }

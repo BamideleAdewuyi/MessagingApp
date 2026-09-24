@@ -9,6 +9,12 @@ function asyncHandler(fn) {
   };
 }
 
+async function userGet(req, res) {
+    const userId = Number(req.params.userId);
+    const user = await db.findUserById({ userId });
+    res.json({ user: user });
+}
+
 const newUserPost = [
   validateUser,
   asyncHandler(async (req, res) => {
@@ -30,5 +36,6 @@ const newUserPost = [
 ]
 
 module.exports = {
+    userGet,
     newUserPost,
 }

@@ -1,5 +1,6 @@
 import styles from "./CreateAccount.module.css"
 import Error from "../Error/Error"
+import { useState } from "react"
 
 function CreateAccount() {
     return(

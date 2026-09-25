@@ -11,7 +11,13 @@ function LogIn() {
 
     const navigate = useNavigate();
 
-    const { setUser } = useOutletContext();
+    const { user, setUser } = useOutletContext();
+
+    useEffect(() => {
+        if (user) {
+            navigate("/")
+        };
+    }, [user, navigate]);
 
     async function logIn(e) {
         e.preventDefault();

@@ -1,4 +1,7 @@
 import styles from "./LogIn.module.css"
+import { useState, useEffect } from "react"
+import { useNavigate, useOutletContext } from "react-router";
+import Error from "../Error/Error";
 
 function LogIn() {
     return(

@@ -8,6 +8,8 @@ function LogIn() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
+    const {user, setUser} = useOutletContext();
+
     return(
         <div className={styles.logInContainer}>
             <form>

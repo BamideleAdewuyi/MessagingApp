@@ -29,10 +29,10 @@ passport.use("user-local",
 
 passport.use(new JWTStrategy({
         jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-        secretOrKey   : process.env.SECRET
+        secretOrKey: process.env.JWT_SECRET || process.env.SECRET
     },
     async function (jwtPayload, cb) {
-        try {const userId = jwtPayload.id
+        try {const userId = Number(jwtPayload.id)
         const user = await db.findUserById({ userId });
         cb(null, user);
         } catch(err) {

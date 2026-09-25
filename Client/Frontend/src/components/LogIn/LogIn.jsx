@@ -9,6 +9,8 @@ function LogIn() {
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
 
+    const navigate = useNavigate();
+
     const { setUser } = useOutletContext();
 
     async function logIn(e) {
@@ -26,6 +28,7 @@ function LogIn() {
         if (res.ok && data.user) {
             setUser(data.user);
             localStorage.setItem("token", data.token);
+            navigate('/');
         } else {
             console.log("Login failed. Message: ", data.message);
             setErrors([data.message]);

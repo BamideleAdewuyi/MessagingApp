@@ -3,9 +3,9 @@ const path = require("node:path");
 const router = require("./routes/index.js");
 const cors = require('cors');
 const app = express();
-require('./passport/passport.js')
 
 require('dotenv/config');
+require('./passport/passport.js')
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");

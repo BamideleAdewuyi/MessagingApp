@@ -42,7 +42,7 @@ function App() {
     return (
       <>
         <Navbar user={user} setUser={setUser} />
-        <Outlet />
+        <Outlet context={{ user, setUser }}/>
       </>
     )
   } else {

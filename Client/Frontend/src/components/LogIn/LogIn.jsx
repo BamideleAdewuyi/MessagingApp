@@ -9,7 +9,7 @@ function LogIn() {
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
 
-    const {user, setUser} = useOutletContext();
+    const { setUser } = useOutletContext();
 
     async function logIn(e) {
         e.preventDefault();
@@ -37,7 +37,7 @@ function LogIn() {
 
     return(
         <div className={styles.logInContainer}>
-            <form>
+            <form onSubmit={logIn}>
                 <label htmlFor="username">Username</label>
                 <input type="text" name="username" value={username} onChange={(e) => setUsername(e.target.value)}/>
                 <label htmlFor="password">Password</label>

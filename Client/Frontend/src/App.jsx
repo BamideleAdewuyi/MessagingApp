@@ -41,7 +41,7 @@ function App() {
   if (!isLoading) {
     return (
       <>
-        <Navbar />
+        <Navbar user={user} setUser={setUser} />
         <Outlet />
       </>
     )

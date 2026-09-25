@@ -21,7 +21,7 @@ authRouter.post('/login', function (req, res, next) {
             conversations: user.conversations,
             sentMessages: user.sentMessages,
            }
-           const token = jwt.sign(userObj, process.env.SECRET);
+           const token = jwt.sign(userObj, process.env.JWT_SECRET || process.env.SECRET);
            return res.json({user, token});
         });
     })(req, res);

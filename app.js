@@ -3,6 +3,7 @@ const path = require("node:path");
 const router = require("./routes/index.js");
 const cors = require('cors');
 const app = express();
+require('./passport/passport.js')
 
 require('dotenv/config');
 

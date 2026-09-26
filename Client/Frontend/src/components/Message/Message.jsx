@@ -1,10 +1,10 @@
 import styles from "./Message.module.css"
 
-function Message({ text, sentAt }) {
+function Message({ id }) {
     return(
         <div className={styles.messageContainer}>
-            <p className={styles.messageText}>{text}</p>
-            <p className={styles.messageTime}>{sentAt}</p>
+            <p className={styles.messageText}>{}</p>
+            <p className={styles.messageTime}>{}</p>
         </div>
     )
 }

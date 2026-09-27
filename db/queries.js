@@ -24,8 +24,21 @@ async function findUserByUsername({ username }) {
     return user;
 }
 
+async function findChatByUserids({ senderId, recipientId }) {
+    const chat = await prisma.chat.findFirst({
+        where: {
+            users: {
+                has: [senderId, recipientId]
+            }
+        }
+    });
+
+    return chat;
+}
+
 module.exports = {
     createNewUser,
     findUserByUsername,
     findUserById,
+    findChatByUserids,
 }

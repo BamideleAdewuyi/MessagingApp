@@ -3,6 +3,9 @@ import Chat from "../Chat/Chat"
 import { useState, useEffect } from "react"
 
 function Chats() {
+
+    const [chats, setChats] = useState([]);
+
     return(
         <div className={styles.chatsContainer}>
             <div className={styles.chatStrip}>

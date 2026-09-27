@@ -33,6 +33,6 @@ model Message {
   author          User @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId        Int
   published       Boolean
-  Chat            Chat @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  chat            Chat @relation(fields: [chatId], references: [id], onDelete: Cascade)
   chatId          Int
 }

@@ -1,6 +1,6 @@
 import styles from "./Message.module.css"
 
-function Message({ id }) {
+function Message({ messageId }) {
     return(
         <div className={styles.messageContainer}>
             <p className={styles.messageText}>{}</p>

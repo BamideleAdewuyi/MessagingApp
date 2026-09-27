@@ -1,7 +1,7 @@
 import styles from "./Chats.module.css"
 import Chat from "../Chat/Chat"
 
-function Chats({ userId }) {
+function Chats() {
     return(
         <div className={styles.chatsContainer}>
             <div className={styles.chatStrip}>

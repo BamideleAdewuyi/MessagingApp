@@ -1,4 +1,5 @@
 import styles from "./Chats.module.css"
+import Chat from "../Chat/Chat"
 
 function Chats({ userId }) {
     return(

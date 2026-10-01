@@ -6,45 +6,37 @@ function Chats() {
 
     const [chats, setChats] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [user, setUser] = useState(null);
-
-    useEffect(() => {
-        async function getToken() {
-        try {
-            const token = localStorage.getItem("token");
-            if (token) {
-            const res = await fetch(`${import.meta.env.VITE_API_PORT}/validate`, {
-                method: "POST",
-                headers: { "Authorization": `Bearer ${token}` },
-            })
-
-            const data = await res.json();
-
-            if (res.ok) {
-                setUser(data);
-                setIsLoading(false);
-            } else {
-                setUser(null);
-                setIsLoading(false);
-                localStorage.removeItem("token");
-            }
-            } else {
-            setIsLoading(false);
-            }
-            
-        } catch (error) {
-            console.log(error);
-        }
-        }
-        getToken()
-    }, []);
 
     useEffect(() => {
         async function getChats() {
+            try {
+                const token = localStorage.getItem("token");
+                if (token) {
+                    const res = await fetch(`${import.meta.env.VITE_API_PORT}/chats`, {
+                        method: "GET",
+                        headers: { "Authorization": `Bearer ${token}` },
+                })
 
+                const data = await res.json();
+
+                if (res.ok) {
+                    setChats(data.chats);
+                    setIsLoading(false);
+                } else {
+                    setChats(null);
+                    setIsLoading(false);
+                    localStorage.removeItem("token");
+                }
+                } else {
+                    setIsLoading(false);
+                }
+                
+            } catch (error) {
+                console.log(error);
+            }
         }
-        if (user) getChats()
-    }, [user])
+        getChats();
+    }, []);
 
     if (!isLoading) {
         return(

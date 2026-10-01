@@ -39,16 +39,24 @@ function Chats() {
         getToken()
     }, []);
 
-    return(
-        <div className={styles.chatsContainer}>
-            <div className={styles.chatStrip}>
-
+    if (!isLoading) {
+        return(
+            <div className={styles.chatsContainer}>
+                <div className={styles.chatStrip}>
+    
+                </div>
+                <div className={styles.selectedChat}>
+                    
+                </div>
             </div>
-            <div className={styles.selectedChat}>
-                
+        )
+    } else {
+        return(
+            <div className={styles.loadingContainer}>
+                <h1>Loading</h1>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 export default Chats

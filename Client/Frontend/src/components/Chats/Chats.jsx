@@ -39,6 +39,13 @@ function Chats() {
         getToken()
     }, []);
 
+    useEffect(() => {
+        async function getChats() {
+
+        }
+        if (user) getChats()
+    }, [user])
+
     if (!isLoading) {
         return(
             <div className={styles.chatsContainer}>

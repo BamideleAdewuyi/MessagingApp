@@ -1,8 +1,8 @@
 const { Router } = require("express");
 const chatController = require("../controllers/chatController");
-const passport = require("../passport/passport");
+const passport = require("passport");
 const chatRouter = Router();
 
-chatRouter.get('/chats', passport.authenticate('jwt', {session: false}), (req, res) => res.json(req.user), chatController.chatsByUserIdGet);
+chatRouter.get('/chats', passport.authenticate('jwt', {session: false}), chatController.chatsByUserIdGet);
 
 module.exports = chatRouter;

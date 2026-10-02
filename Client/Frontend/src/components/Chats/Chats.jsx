@@ -50,6 +50,7 @@ function Chats() {
                 <div className={styles.selectedChat}>
                     
                 </div>
+                <button>New Chat</button>
             </div>
         )
     } else {

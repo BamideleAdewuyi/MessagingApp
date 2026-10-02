@@ -1,7 +1,7 @@
 import styles from "./NewChatBox.module.css"
 import { useRef, useEffect } from "react";
 
-function NewChatBox({ open, contacts, closeBox }) {
+function NewChatBox({ openAndClose, contacts }) {
     const dialogRef = useRef();
 
     useEffect(() => {
@@ -12,7 +12,7 @@ function NewChatBox({ open, contacts, closeBox }) {
                 dialogRef.current.close();
             }
         }
-    }, [open]);
+    }, [openAndClose]);
 
     return(
         <div className={styles.newChatBoxContainer}>
@@ -27,7 +27,7 @@ function NewChatBox({ open, contacts, closeBox }) {
                         })}
                     </datalist>
                     <button type="submit">Start Chat</button>
-                    <button type="button" onClick={() => closeBox()}>Close</button>
+                    <button type="button" onClick={() => openAndClose()}>Close</button>
                 </form>
             </dialog>
         </div>

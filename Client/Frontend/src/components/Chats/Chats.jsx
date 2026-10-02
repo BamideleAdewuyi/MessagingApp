@@ -52,6 +52,7 @@ function Chats() {
                     
                 </div>
                 <button>New Chat</button>
+                <NewChatBox  contacts={ [] } />
             </div>
         )
     } else {

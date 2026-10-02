@@ -1,5 +1,6 @@
 import styles from "./Chats.module.css"
 import Chat from "../Chat/Chat"
+import ChatPreview from "../ChatPreview/ChatPreview"
 import { useState, useEffect } from "react"
 
 function Chats() {

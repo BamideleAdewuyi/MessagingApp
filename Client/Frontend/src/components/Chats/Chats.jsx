@@ -8,6 +8,7 @@ function Chats() {
 
     const [chats, setChats] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
         async function getChats() {

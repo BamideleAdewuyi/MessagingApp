@@ -1,10 +1,10 @@
 import styles from "./Chat.module.css"
 
 
-function Chat({ chatId }) {
+function Chat({ chat }) {
     return(
         <div className={styles.chatContainer}>
-
+            
         </div>
     )
 }

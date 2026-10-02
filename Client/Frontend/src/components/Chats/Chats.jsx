@@ -21,7 +21,7 @@ function Chats() {
                 const data = await res.json();
 
                 if (res.ok) {
-                    setChats(data.chats);
+                    setChats(data.chats || []);
                     setIsLoading(false);
                 } else {
                     setChats(null);
@@ -43,7 +43,9 @@ function Chats() {
         return(
             <div className={styles.chatsContainer}>
                 <div className={styles.chatStrip}>
-    
+                    {chats.map(({chat, index}) => {
+                        <ChatPreview key={index} chat={chat}/>
+                    })}
                 </div>
                 <div className={styles.selectedChat}>
                     

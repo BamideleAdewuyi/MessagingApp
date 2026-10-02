@@ -41,6 +41,14 @@ function Chats() {
         getChats();
     }, []);
 
+    function toggleNewChatBox() {
+        if (open) {
+            setOpen(false);
+        } else {
+            setOpen(true);
+        }
+    }
+
     if (!isLoading) {
         return(
             <div className={styles.chatsContainer}>
@@ -52,8 +60,8 @@ function Chats() {
                 <div className={styles.selectedChat}>
                     
                 </div>
-                <button>New Chat</button>
-                <NewChatBox  contacts={ [] } />
+                <button type="button" onClick={() => toggleNewChatBox()}>New Chat</button>
+                <NewChatBox open={open} toggleNewChatBox={toggleNewChatBox} contacts={ [] } />
             </div>
         )
     } else {

@@ -21,10 +21,10 @@ function NewChatBox({ open, contacts, toggleNewChatBox }) {
                     <h1>Start a new chat</h1>
                     <label htmlFor="contacts">Choose a contact</label>
                     <input list="contacts" name="contacts" />
-                    <datalist>
-                        {contacts.map(({ contact, index }) => {
+                    <datalist id="contacts">
+                        {contacts.map(( contact, index ) => (
                             <option key={index} value={contact.username}>{contact.username}</option>
-                        })}
+                        ))}
                     </datalist>
                     <button type="submit">Start Chat</button>
                     <button type="button" onClick={() => toggleNewChatBox()}>Close</button>

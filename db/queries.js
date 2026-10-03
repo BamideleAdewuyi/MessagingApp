@@ -1,3 +1,4 @@
+const { use } = require("react");
 const prisma = require("../lib/prisma.js");
 
 async function createNewUser({ username, password }) {
@@ -36,9 +37,22 @@ async function findChatByUserids({ senderId, recipientId }) {
     return chat;
 }
 
+async function findContacts({ userId }) {
+    const contacts = await prisma.user.findMany({
+        where: {
+            id: {
+                not: userId
+            }
+        }
+    });
+
+    return contacts;
+}
+
 module.exports = {
     createNewUser,
     findUserByUsername,
     findUserById,
     findChatByUserids,
+    findContacts,
 }

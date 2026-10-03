@@ -9,6 +9,7 @@ function Chats() {
     const [chats, setChats] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [open, setOpen] = useState(false);
+    const [contacts, setContacts] = useState([]);
 
     useEffect(() => {
         async function getChats() {
@@ -41,6 +42,36 @@ function Chats() {
         getChats();
     }, []);
 
+    useEffect(() => {
+        async function getContacts() {
+            try {
+                const token = localStorage.getItem("token");
+                if (token) {
+                    const res = await fetch(`${import.meta.env.VITE_API_PORT}/contacts`, {
+                        method: "GET",
+                        headers: { "Authorization": `Bearer ${token}` },
+                })
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    setContacts(data.contacts || []);
+                    setIsLoading(false);
+                } else {
+                    setContacts(null);
+                    setIsLoading(false);
+                    localStorage.removeItem("token");
+                }
+                } else {
+                    setIsLoading(false);
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        getContacts();
+    }, [])
+
     function toggleNewChatBox() {
         if (open) {
             setOpen(false);
@@ -61,7 +92,7 @@ function Chats() {
                     
                 </div>
                 <button type="button" onClick={() => toggleNewChatBox()}>New Chat</button>
-                <NewChatBox open={open} toggleNewChatBox={toggleNewChatBox} contacts={ [] } />
+                <NewChatBox open={open} toggleNewChatBox={toggleNewChatBox} contacts={ contacts } />
             </div>
         )
     } else {

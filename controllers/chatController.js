@@ -7,6 +7,13 @@ async function chatsByUserIdGet(req, res) {
     res.json({ chats: chats });
 }
 
+async function contactsGet(req, res) {
+    const userId = Number(req.user.id);
+    const contacts = await db.findContacts({ userId });
+    res.json({ contacts: contacts });
+}
+
 module.exports = {
     chatsByUserIdGet,
+    contactsGet,
 }

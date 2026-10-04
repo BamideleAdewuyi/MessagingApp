@@ -15,6 +15,12 @@ async function userGet(req, res) {
     res.json({ user: user });
 }
 
+async function userByUserNameGet(req, res) {
+  const username = req.body.username;
+  const user = await db.findUserByUsername({ username });
+  res.json({ user: user });
+}
+
 const newUserPost = [
   validateUser,
   asyncHandler(async (req, res) => {
@@ -37,5 +43,6 @@ const newUserPost = [
 
 module.exports = {
     userGet,
+    userByUserNameGet,
     newUserPost,
 }

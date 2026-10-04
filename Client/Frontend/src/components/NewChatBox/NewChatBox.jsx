@@ -19,6 +19,8 @@ function NewChatBox({ open, contacts, toggleNewChatBox }) {
             <dialog ref={dialogRef}>
                 <form>
                     <h1>Start a new chat</h1>
+                    <label htmlFor="message">Write message</label>
+                    <input type="text" name="message" />
                     <label htmlFor="contacts">Choose a contact</label>
                     <input list="contacts" name="contacts" />
                     <datalist id="contacts">

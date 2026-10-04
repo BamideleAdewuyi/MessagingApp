@@ -10,6 +10,7 @@ function Chats() {
     const [isLoading, setIsLoading] = useState(true);
     const [open, setOpen] = useState(false);
     const [contacts, setContacts] = useState([]);
+    const [selectedChat, setSelectedChat] = useState(null);
 
     useEffect(() => {
         async function getChats() {

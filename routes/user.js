@@ -3,7 +3,7 @@ const userController = require("../controllers/userController");
 const passport = require("passport");
 const userRouter = Router();
 
-userRouter.get('/username', passport.authenticate('jwt', {session: false}), userController.userByUserNameGet);
+userRouter.get('/searchUsername/:username', passport.authenticate('jwt', {session: false}), userController.userByUserNameGet);
 
 userRouter.post('/user/new', userController.newUserPost);
 

@@ -16,7 +16,7 @@ async function userGet(req, res) {
 }
 
 async function userByUserNameGet(req, res) {
-  const username = req.body.username;
+  const username = req.params.username;
   const user = await db.findUserByUsername({ username });
   res.json({ user: user });
 }

@@ -22,7 +22,7 @@ model User {
 model Chat {
   id                  Int @id @default(autoincrement())
   messages            Message[]
-  userids             Int[]
+  userIds             Int[]
 }
 
 model Message {

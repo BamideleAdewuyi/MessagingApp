@@ -15,7 +15,7 @@ async function contactsGet(req, res) {
 
 async function checkChatExistsGet(req, res) {
     const senderId = Number(req.user.id);
-    const recipientId = Number(req.body.recipientId);
+    const recipientId = Number(req.params.recipientId);
     const chat = await db.findChatByUserids({ senderId, recipientId });
     res.json({ chat: chat });
 }

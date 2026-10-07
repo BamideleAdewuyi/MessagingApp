@@ -49,10 +49,33 @@ async function findContacts({ userId }) {
     return contacts;
 }
 
+async function createNewMessage({ message, authorId, chatId }) {
+    const newMessage = await prisma.message.create({
+        data: {
+            message: message,
+            authorId: authorId,
+            postedAt: new Date(),
+            chatId: chatId,
+        }
+    });
+    return newMessage;
+}
+
+async function createNewChat({ senderId, recipientId }) {
+    const newChat = await prisma.chat.create({
+        data: {
+            userIds: [senderId, recipientId]
+        }
+    });
+    return newChat;
+}
+
 module.exports = {
     createNewUser,
     findUserByUsername,
     findUserById,
     findChatByUserids,
     findContacts,
+    createNewMessage,
+    createNewChat,
 }

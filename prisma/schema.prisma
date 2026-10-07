@@ -27,7 +27,6 @@ model Chat {
 
 model Message {
   id                  Int @id @default(autoincrement())
-  subject             String
   message             String
   author              User @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId            Int

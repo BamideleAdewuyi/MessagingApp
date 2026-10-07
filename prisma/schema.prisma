@@ -31,7 +31,6 @@ model Message {
   message             String
   author              User @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId            Int
-  published           Boolean
   postedAt            DateTime?
   chat                Chat @relation(fields: [chatId], references: [id], onDelete: Cascade)
   chatId              Int

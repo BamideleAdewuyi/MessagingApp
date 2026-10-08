@@ -25,6 +25,13 @@ async function findUserByUsername({ username }) {
     return user;
 }
 
+async function findChatById({ chatId }) {
+    const chat = await prisma.chat.findFirst({
+        where: { id: chatId },
+    });
+    return chat;
+}
+
 async function findChatByUserids({ senderId, recipientId }) {
     const chat = await prisma.chat.findFirst({
         where: {
@@ -74,6 +81,7 @@ module.exports = {
     createNewUser,
     findUserByUsername,
     findUserById,
+    findChatById,
     findChatByUserids,
     findContacts,
     createNewMessage,

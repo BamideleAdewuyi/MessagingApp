@@ -27,8 +27,29 @@ async function checkChatExistsGet(req, res) {
     res.json({ chat: chat });
 }
 
+const newChatPost = [
+    validateChat,
+    asyncHandler(async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+          return res.status(400).json({
+            errors: errors.array()
+          })
+        }
+        
+        const { recipientId } = matchedData(req);
+        const senderId = Number(req.user.id);
+        const newChat = await db.createNewChat({ senderId, recipientId });
+        return res.status(201).json({
+          msg: "Chat create",
+          newChat: newChat,
+        })
+    })
+]
+
 module.exports = {
     chatsByUserIdGet,
     contactsGet,
     checkChatExistsGet,
+    newChatPost,
 }

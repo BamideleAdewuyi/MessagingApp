@@ -1,4 +1,5 @@
 const db = require("../db/queries");
+const { validationResult, matchedData } = require("express-validator");
 const validateChat = require("../validators/chatValidator");
 
 function asyncHandler(fn) {

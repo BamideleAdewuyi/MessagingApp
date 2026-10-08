@@ -7,4 +7,6 @@ chatRouter.get('/chats', passport.authenticate('jwt', {session: false}), chatCon
 chatRouter.get('/contacts', passport.authenticate('jwt', {session: false}), chatController.contactsGet);
 chatRouter.get('/checkChat/:recipientId', passport.authenticate('jwt', {session: false}), chatController.checkChatExistsGet);
 
+chatRouter.post("/newChat", passport.authenticate('jwt', {session: false}), chatController.newChatPost);
+
 module.exports = chatRouter;

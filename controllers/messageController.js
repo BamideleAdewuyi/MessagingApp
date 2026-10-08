@@ -20,7 +20,8 @@ const newMessagePost = [
         
         const { message, chatId } = matchedData(req);
         const authorId = Number(req.user.id);
-        const newMessage = await db.createNewMessage({ authorId, message, chatId });
+        const cleanChatId = Number(chatId);
+        const newMessage = await db.createNewMessage({ authorId, message, chatId: cleanChatId });
         return res.status(201).json({
           msg: "Message created",
           newMessage: newMessage,

@@ -7,7 +7,7 @@ const recipientErr = "Must have recipient";
 const invalidChatErr = "Invalid chat"
 
 const validateMessage = [
-    body("text").trim()
+    body("message").trim()
         .isLength({ min: 1 }).withMessage(`Message ${messageBlankErr}`)
         .isLength({ max: 6000 }).withMessage(`Message ${lengthErr}`),
     body("chatId").trim()

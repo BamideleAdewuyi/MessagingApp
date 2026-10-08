@@ -1,4 +1,5 @@
 const db = require("../db/queries");
+const validateChat = require("../validators/chatValidator");
 
 function asyncHandler(fn) {
   return function (req, res, next) {

@@ -1,5 +1,11 @@
 const db = require("../db/queries");
 
+function asyncHandler(fn) {
+  return function (req, res, next) {
+    Promise.resolve(fn(req, res, next)).catch(next);
+  };
+}
+
 async function chatsByUserIdGet(req, res) {
     const userId = Number(req.user.id);
     const user = await db.findUserById({ userId });

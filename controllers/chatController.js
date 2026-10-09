@@ -9,9 +9,8 @@ function asyncHandler(fn) {
 }
 
 async function chatsByUserIdGet(req, res) {
-    const userId = Number(req.user.id);
-    const user = await db.findUserById({ userId });
-    const chats = user.chats;
+    const senderId = Number(req.user.id);
+    const chats = await db.findChatsByUserId({ senderId });
     res.json({ chats: chats });
 }
 

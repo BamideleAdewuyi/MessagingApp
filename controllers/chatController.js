@@ -48,9 +48,17 @@ const newChatPost = [
     })
 ]
 
+async function recipientByChatIdGet(req, res) {
+  const userId = req.user.id;
+  const chatId = req.params.chatId;
+  const recipient = db.findRecipientByChatId({ chatId, userId });
+  res.json({ recipient: recipient });
+}
+
 module.exports = {
     chatsByUserIdGet,
     contactsGet,
     checkChatExistsGet,
     newChatPost,
+    recipientByChatIdGet,
 }

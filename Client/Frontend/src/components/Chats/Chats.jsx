@@ -10,7 +10,7 @@ function Chats() {
     const [isLoading, setIsLoading] = useState(true);
     const [open, setOpen] = useState(false);
     const [contacts, setContacts] = useState([]);
-    const [selectedChat, setSelectedChat] = useState(chats[0] || null);
+    const [selectedChat, setSelectedChat] = useState(null);
 
     async function getChats(chatArrays) {
         const token = localStorage.getItem("token");
@@ -30,6 +30,9 @@ function Chats() {
                 })
             )
             setChats(allMessages);
+            if (allMessages && allMessages.length > 0 && allMessages[0][0]) {
+                setSelectedChat(allMessages[0][0].chatId);
+            }
         } catch (error) {
             console.log(error);
         }
@@ -104,6 +107,10 @@ function Chats() {
         }
     }
 
+    function selectChat(chatId) {
+        setSelectedChat(chatId);
+    }
+
     if (!isLoading) {
         return(
             <div>
@@ -111,7 +118,7 @@ function Chats() {
                     <div className={styles.chatStrip}>
                         {chats.length > 0 && 
                             chats.map((chat, index) => (
-                                <ChatPreview key={index} chat={chat} />
+                                <ChatPreview key={index} chat={chat} handleClick={selectChat}/>
                         ))}
                     </div>
                     <div className={styles.selectedChat}>

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 function ChatPreview({ chat, handleClick }) {
     const message = chat[0].message;
-    const chatId = chat[0].id;
+    const chatId = chat[0].chatId;
 
     const [isLoading, setIsLoading] = useState(true);
     const [recipientName, setRecipientName] = useState('');

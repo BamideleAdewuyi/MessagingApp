@@ -51,7 +51,7 @@ const newChatPost = [
 async function recipientByChatIdGet(req, res) {
   const userId = Number(req.user.id);
   const chatId = Number(req.params.chatId);
-  const recipient = db.findRecipientByChatId({ chatId, userId });
+  const recipient = await db.findRecipientByChatId({ chatId, userId });
   res.json({ recipient: recipient });
 }
 

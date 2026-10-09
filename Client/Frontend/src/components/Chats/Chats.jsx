@@ -106,14 +106,16 @@ function Chats() {
 
     if (!isLoading) {
         return(
-            <div className={styles.chatsContainer}>
-                <div className={styles.chatStrip}>
-                    {chats.map(({chat, index}) => {
-                        <ChatPreview key={index} chat={chat} />
-                    })}
-                </div>
-                <div className={styles.selectedChat}>
-                    
+            <div>
+                <div className={styles.chatsContainer}>
+                    <div className={styles.chatStrip}>
+                        {chats.map((chat, index) => (
+                            <ChatPreview key={index} chat={chat} />
+                        ))}
+                    </div>
+                    <div className={styles.selectedChat}>
+
+                    </div>
                 </div>
                 <button type="button" onClick={() => toggleNewChatBox()}>New Chat</button>
                 <NewChatBox open={open} toggleNewChatBox={toggleNewChatBox} contacts={ contacts } />

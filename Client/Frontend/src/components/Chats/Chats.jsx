@@ -109,8 +109,9 @@ function Chats() {
             <div>
                 <div className={styles.chatsContainer}>
                     <div className={styles.chatStrip}>
-                        {chats.map((chat, index) => (
-                            <ChatPreview key={index} chat={chat} />
+                        {chats.length > 0 && 
+                            chats.map((chat, index) => (
+                                <ChatPreview key={index} chat={chat} />
                         ))}
                     </div>
                     <div className={styles.selectedChat}>

@@ -4,9 +4,7 @@ import { useRef, useEffect, useState } from "react";
 function NewChatBox({ open, contacts, toggleNewChatBox }) {
     const dialogRef = useRef();
     const [recipient, setRecipient] = useState("");
-    const [recipientId, setRecipientId] = useState("");
     const [message, setMessage] = useState("");
-    const [newChatId, setNewChatId] = useState("");
 
     useEffect(() => {
         if (dialogRef.current) {
@@ -28,7 +26,6 @@ function NewChatBox({ open, contacts, toggleNewChatBox }) {
                 })
                 const data = await res.json();
                 if (res.ok) {
-                    setRecipientId(Number(data.user.id));
                     return Number(data.user.id);
                 } else {
                     console.log("No user found");
@@ -56,7 +53,6 @@ function NewChatBox({ open, contacts, toggleNewChatBox }) {
             const data = await res.json();
             if (data.msg) {
                 console.log(data.msg);
-                setNewChatId(data.newChat.id);
                 return data.newChat.id;
             } else {
                 console.log(data.errors);

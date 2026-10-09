@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 
 function ChatPreview({ chat, handleClick }) {
     const message = chat[0].message;
+    const chatId = chat[0].id;
 
     const [isLoading, setIsLoading] = useState(true);
     const [recipientName, setRecipientName] = useState('');
@@ -35,7 +36,7 @@ function ChatPreview({ chat, handleClick }) {
 
     if (!isLoading) {
         return(
-            <div className={styles.chatPreviewContainer} >
+            <div className={styles.chatPreviewContainer} onClick={() => handleClick(chatId)}>
                 <h1>{recipientName}</h1>
                 <p>{message}</p>
             </div>

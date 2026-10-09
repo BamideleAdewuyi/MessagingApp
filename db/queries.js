@@ -98,6 +98,13 @@ async function createNewChat({ senderId, recipientId }) {
     return newChat;
 }
 
+async function findRecipientByChatId({ chatId, userId }) {
+    const chat = await findChatById({ chatId });
+    const recipientId = chat.userIds.find(id => id !== userId);
+    const recipient = await findUserById({ userId: recipientId });
+    return recipient;
+}
+
 module.exports = {
     createNewUser,
     findUserByUsername,
@@ -106,6 +113,7 @@ module.exports = {
     findChatByUserIds,
     findChatsByUserId,
     findMessagesByChatId,
+    findRecipientByChatId,
     findContacts,
     createNewMessage,
     createNewChat,

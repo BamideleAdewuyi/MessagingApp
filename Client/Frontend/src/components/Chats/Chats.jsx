@@ -10,7 +10,7 @@ function Chats() {
     const [isLoading, setIsLoading] = useState(true);
     const [open, setOpen] = useState(false);
     const [contacts, setContacts] = useState([]);
-    const [selectedChat, setSelectedChat] = useState(null);
+    const [selectedChat, setSelectedChat] = useState(chats[0] || null);
 
     async function getChats(chatArrays) {
         const token = localStorage.getItem("token");

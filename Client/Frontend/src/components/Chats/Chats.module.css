@@ -1,0 +1,11 @@
+.chatsContainer {
+    display: flex;
+    outline: 1px solid black;
+    height: 50em;
+}
+
+.chatStrip {
+    display: flex;
+    flex-direction: column;
+    outline: 1px solid black;
+}

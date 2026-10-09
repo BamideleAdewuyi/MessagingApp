@@ -43,7 +43,7 @@ const newChatPost = [
         const senderId = Number(req.user.id);
         const newChat = await db.createNewChat({ senderId, recipientId: cleanRecipientId });
         return res.status(201).json({
-          msg: "Chat create",
+          msg: "Chat created",
           newChat: newChat,
         })
     })

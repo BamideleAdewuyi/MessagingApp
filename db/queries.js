@@ -100,7 +100,7 @@ async function createNewChat({ senderId, recipientId }) {
 
 async function findRecipientByChatId({ chatId, userId }) {
     const chat = await findChatById({ chatId });
-    const recipientId = chat.userIds.find(id => id !== userId);
+    const recipientId = Number(chat.userIds.find(id => id !== userId));
     const recipient = await findUserById({ userId: recipientId });
     return recipient;
 }

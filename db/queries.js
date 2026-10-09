@@ -57,6 +57,11 @@ async function findChatsByUserId({ senderId }) {
 
 async function findMessagesByChatId({ chatId }) {
     const messages = await prisma.message.findMany({
+        orderBy: [
+            {
+                postedAt: "desc"
+            }
+        ],
         where: {
             chatId: chatId,
         }

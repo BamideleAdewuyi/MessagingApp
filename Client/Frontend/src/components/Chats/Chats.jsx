@@ -12,8 +12,31 @@ function Chats() {
     const [contacts, setContacts] = useState([]);
     const [selectedChat, setSelectedChat] = useState(null);
 
+    async function getChats(chatArrays) {
+        const token = localStorage.getItem("token");
+        try {
+            const allMessages = await Promise.all(
+                chatArrays.map(async (chat) => {
+                    const res = await fetch(`${import.meta.env.VITE_API_PORT}/messages/${chat.id}`, {
+                            method: "GET",
+                            headers: { "Authorization": `Bearer ${token}` },
+                    });
+                    const data = await res.json();
+                    if (res.ok) {
+                        return data.messages;
+                    } else {
+                        console.log("Error");
+                    }
+                })
+            )
+            setChats(allMessages);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     useEffect(() => {
-        async function getChats() {
+        async function getChatArrays() {
             try {
                 const token = localStorage.getItem("token");
                 if (token) {
@@ -25,10 +48,10 @@ function Chats() {
                 const data = await res.json();
 
                 if (res.ok) {
-                    setChats(data.chats || []);
+                    await getChats(data.chats || []);
                     setIsLoading(false);
+                    return data.chats || [];
                 } else {
-                    setChats(null);
                     setIsLoading(false);
                     localStorage.removeItem("token");
                 }
@@ -40,7 +63,7 @@ function Chats() {
                 console.log(error);
             }
         }
-        getChats();
+        getChatArrays();
     }, []);
 
     useEffect(() => {
@@ -86,7 +109,7 @@ function Chats() {
             <div className={styles.chatsContainer}>
                 <div className={styles.chatStrip}>
                     {chats.map(({chat, index}) => {
-                        <ChatPreview key={index} chat={chat}/>
+                        <ChatPreview key={index} chat={chat} />
                     })}
                 </div>
                 <div className={styles.selectedChat}>

@@ -50,7 +50,10 @@ async function findChatsByUserId({ senderId }) {
             userIds: {
                 has: senderId,
             }
-        }
+        },
+        include: {
+                messages: true,
+            },
     });
     return chats;
 }

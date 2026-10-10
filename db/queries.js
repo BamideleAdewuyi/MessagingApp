@@ -52,7 +52,7 @@ async function findChatsByUserId({ senderId }) {
             }
         },
         include: {
-                messages: true,
+                messages: { orderBy: { postedAt: "desc" }},
             },
     });
     return chats;

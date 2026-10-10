@@ -2,8 +2,8 @@ import styles from "./ChatPreview.module.css"
 import { useState, useEffect } from "react";
 
 function ChatPreview({ chat, handleClick }) {
-    const message = chat[0].message;
-    const chatId = chat[0].chatId;
+    const message = chat.messages[0];
+    const chatId = chat.id;
 
     const [isLoading, setIsLoading] = useState(true);
     const [recipientName, setRecipientName] = useState('');
@@ -12,7 +12,7 @@ function ChatPreview({ chat, handleClick }) {
         async function getRecipientName() {
             const token = localStorage.getItem("token");
             try {
-                const res = await fetch(`${import.meta.env.VITE_API_PORT}/findRecipient/${chat[0].chatId}`, {
+                const res = await fetch(`${import.meta.env.VITE_API_PORT}/findRecipient/${chatId}`, {
                         method: "GET",
                         headers: { "Authorization": `Bearer ${token}` },
                 });
@@ -32,13 +32,13 @@ function ChatPreview({ chat, handleClick }) {
             }
         };
         getRecipientName();
-    }, [chat]);
+    }, [chatId]);
 
     if (!isLoading) {
         return(
             <div className={styles.chatPreviewContainer} onClick={() => handleClick(chatId)}>
                 <h1>{recipientName}</h1>
-                <p>{message}</p>
+                <p>{message.message}</p>
             </div>
         )
     } else {

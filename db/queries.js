@@ -58,21 +58,6 @@ async function findChatsByUserId({ senderId }) {
     return chats;
 }
 
-async function findMessagesByChatId({ chatId }) {
-    const messages = await prisma.message.findMany({
-        orderBy: [
-            {
-                postedAt: "desc"
-            }
-        ],
-        where: {
-            chatId: chatId,
-        }
-    });
-
-    return messages;
-}
-
 async function findContacts({ userId }) {
     const contacts = await prisma.user.findMany({
         where: {
@@ -120,7 +105,6 @@ module.exports = {
     findChatById,
     findChatByUserIds,
     findChatsByUserId,
-    findMessagesByChatId,
     findRecipientByChatId,
     findContacts,
     createNewMessage,

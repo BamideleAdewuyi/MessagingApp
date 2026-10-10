@@ -27,7 +27,12 @@ async function findUserByUsername({ username }) {
 
 async function findChatById({ chatId }) {
     const chat = await prisma.chat.findFirst({
-        where: { id: chatId },
+        where: { 
+            id: chatId 
+        },
+        include: {
+                messages: { orderBy: { postedAt: "desc" }},
+            },
     });
     return chat;
 }

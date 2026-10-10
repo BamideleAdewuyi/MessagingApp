@@ -14,6 +14,17 @@ async function chatsByUserIdGet(req, res) {
     res.json({ chats: chats });
 }
 
+async function chatByChatIdGet(req, res) {
+  const chatId = Number(req.params.chatId);
+  const userId = Number(req.user.id);
+  const chat = await db.findChatById({ chatId });
+  if (chat.userIds.includes(userId)) {
+    res.json({ chat: chat });
+  } else {
+    res.status(403).json({ msg: "Not authorised" });
+  }
+}
+
 async function contactsGet(req, res) {
     const userId = Number(req.user.id);
     const contacts = await db.findContacts({ userId });
@@ -59,6 +70,7 @@ module.exports = {
     chatsByUserIdGet,
     contactsGet,
     checkChatExistsGet,
+    chatByChatIdGet,
     newChatPost,
     recipientByChatIdGet,
 }

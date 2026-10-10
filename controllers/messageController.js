@@ -8,18 +8,6 @@ function asyncHandler(fn) {
   };
 }
 
-async function messagesByChatIdGet(req, res) {
-  const chatId = Number(req.params.chatId);
-  const userId = Number(req.user.id);
-  const chat = await db.findChatById({ chatId });
-  if (chat.userIds.includes(userId)) {
-    const messages = await db.findMessagesByChatId({ chatId });
-    res.json({ messages: messages });
-  } else {
-    res.status(403).json({ msg: "Not authorised" });
-  }
-}
-
 const newMessagePost = [
     validateMessage,
     asyncHandler(async (req, res) => {
@@ -43,5 +31,4 @@ const newMessagePost = [
 
 module.exports = {
     newMessagePost,
-    messagesByChatIdGet,
 }

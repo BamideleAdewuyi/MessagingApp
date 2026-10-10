@@ -12,34 +12,8 @@ function Chats() {
     const [contacts, setContacts] = useState([]);
     const [selectedChat, setSelectedChat] = useState(null);
 
-    async function getChats(chatArrays) {
-        const token = localStorage.getItem("token");
-        try {
-            const allMessages = await Promise.all(
-                chatArrays.map(async (chat) => {
-                    const res = await fetch(`${import.meta.env.VITE_API_PORT}/messages/${chat.id}`, {
-                            method: "GET",
-                            headers: { "Authorization": `Bearer ${token}` },
-                    });
-                    const data = await res.json();
-                    if (res.ok) {
-                        return data.messages;
-                    } else {
-                        console.log("Error");
-                    }
-                })
-            )
-            setChats(allMessages);
-            if (allMessages && allMessages.length > 0 && allMessages[0][0]) {
-                setSelectedChat(allMessages[0][0].chatId);
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
     useEffect(() => {
-        async function getChatArrays() {
+        async function getChats() {
             try {
                 const token = localStorage.getItem("token");
                 if (token) {
@@ -51,9 +25,9 @@ function Chats() {
                 const data = await res.json();
 
                 if (res.ok) {
-                    await getChats(data.chats || []);
+                    setChats(data.chats);
+                    setSelectedChat(data.chats[0].id);
                     setIsLoading(false);
-                    return data.chats || [];
                 } else {
                     setIsLoading(false);
                     localStorage.removeItem("token");
@@ -66,7 +40,7 @@ function Chats() {
                 console.log(error);
             }
         }
-        getChatArrays();
+        getChats();
     }, []);
 
     useEffect(() => {

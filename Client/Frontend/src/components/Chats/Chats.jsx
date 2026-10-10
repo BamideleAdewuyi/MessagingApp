@@ -111,7 +111,7 @@ function Chats() {
         setSelectedChat(chatId);
     }
 
-    if (!isLoading) {
+    if (!isLoading && selectedChat) {
         return(
             <div>
                 <div className={styles.chatsContainer}>
@@ -122,7 +122,7 @@ function Chats() {
                         ))}
                     </div>
                     <div className={styles.selectedChat}>
-
+                        <Chat chatId={selectedChat}/>
                     </div>
                 </div>
                 <button type="button" onClick={() => toggleNewChatBox()}>New Chat</button>

@@ -108,7 +108,7 @@ function Chats() {
                             <button type="submit">Send</button>
                         </form>
                     </div>
-                    <NewChatBox open={open} toggleNewChatBox={toggleNewChatBox} contacts={ contacts } />
+                    <NewChatBox open={open} toggleNewChatBox={toggleNewChatBox} contacts={contacts} setSelectedChat={setSelectedChat} />
                 </div>
             </div>
         )

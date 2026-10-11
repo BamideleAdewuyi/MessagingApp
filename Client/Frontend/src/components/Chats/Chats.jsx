@@ -99,8 +99,17 @@ function Chats() {
                         <Chat chatId={selectedChat}/>
                     </div>
                 </div>
-                <button type="button" onClick={() => toggleNewChatBox()}>New Chat</button>
-                <NewChatBox open={open} toggleNewChatBox={toggleNewChatBox} contacts={ contacts } />
+                <div className={styles.newMessageContainer}>
+                    <button type="button" onClick={() => toggleNewChatBox()}>New Chat</button>
+                    <div className={styles.newMessageFormContainer}>
+                        <form className={styles.newMessageForm}>
+                            <label htmlFor="message">Message</label>
+                            <textarea className={styles.newMessageInput} type="text" name="message" />
+                            <button type="submit">Send</button>
+                        </form>
+                    </div>
+                    <NewChatBox open={open} toggleNewChatBox={toggleNewChatBox} contacts={ contacts } />
+                </div>
             </div>
         )
     } else {

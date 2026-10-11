@@ -1,7 +1,7 @@
 import styles from "./ChatPreview.module.css"
 import { useState, useEffect } from "react";
 
-function ChatPreview({ chat, handleClick }) {
+function ChatPreview({ chat, handleClick, selectedChat }) {
     const message = chat.messages[0];
     const chatId = chat.id;
 
@@ -36,7 +36,7 @@ function ChatPreview({ chat, handleClick }) {
 
     if (!isLoading) {
         return(
-            <div className={styles.chatPreviewContainer} onClick={() => handleClick(chatId)}>
+            <div style={Number(chatId) == Number(selectedChat) ? {fontWeight: "bold"} : {fontWeight: "normal"}} className={styles.chatPreviewContainer} onClick={() => handleClick(chatId)}>
                 <h1>{recipientName}</h1>
                 <p>{message.message}</p>
             </div>

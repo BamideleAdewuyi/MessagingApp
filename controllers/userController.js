@@ -12,7 +12,11 @@ function asyncHandler(fn) {
 async function userGet(req, res) {
     const userId = Number(req.params.userId);
     const user = await db.findUserById({ userId });
-    res.json({ user: user });
+    if (user.id == userId) {
+      res.json({ user: user });
+    } else {
+      res.json({ msg: "Not authorised" });
+    }
 }
 
 async function userByUserNameGet(req, res) {

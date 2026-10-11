@@ -87,7 +87,7 @@ function Chats() {
 
     if (!isLoading && selectedChat) {
         return(
-            <div>
+            <div className={styles.chatsAndPreviewsContainer}>
                 <div className={styles.chatsContainer}>
                     <div className={styles.chatStrip}>
                         {chats.length > 0 && 

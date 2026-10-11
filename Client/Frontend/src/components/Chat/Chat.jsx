@@ -39,13 +39,9 @@ function Chat({ chatId }) {
     if (!isLoading && messages.length > 0) {
         return(
             <div className={styles.chatContainer}>
-                <div className={styles.messagesContainer}>
-                    {messages.map((message, index) => (
-                        <div key={index}  className={styles.messageContainer}>
-                            <Message message={message}/>
-                        </div>
-                    ))}
-                </div>
+                {messages.map((message, index) => (
+                    <Message key={index} message={message}/>
+                ))}
             </div>
         )
     } else {

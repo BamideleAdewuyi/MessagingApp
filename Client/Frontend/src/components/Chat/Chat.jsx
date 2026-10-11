@@ -4,10 +4,10 @@ import { useState, useEffect } from "react"
 
 function Chat({ chatId }) {
     const [isLoading, setIsLoading] = useState(true);
-    const [chat, setChat] = useState(null);
+    const [messages, setMessages] = useState(null);
 
     useEffect(() => {
-        async function getChat() {
+        async function getMessages() {
             try {
                 const token = localStorage.getItem("token");
                 if (token) {
@@ -19,8 +19,7 @@ function Chat({ chatId }) {
                 const data = await res.json();
 
                 if (res.ok) {
-                    setChat(data.chat);
-                    console.log(data)
+                    setMessages(data.chat.messages.reverse());
                     setIsLoading(false);
                 } else {
                     console.log("Chat unavailable");
@@ -35,13 +34,27 @@ function Chat({ chatId }) {
                 console.log(error);
             }
         }
-        getChat();
+        getMessages();
     }, [chatId]);
-    return(
-        <div className={styles.chatContainer}>
-
-        </div>
-    )
+    if (!isLoading && messages.length > 0) {
+        return(
+            <div className={styles.chatContainer}>
+                <div className={styles.messagesContainer}>
+                    {messages.map((message, index) => (
+                        <div className={styles.messageContainer}>
+                            <Message key={index} message={message}/>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        )
+    } else {
+        return(
+            <div>
+                <h1>Loading</h1>
+            </div>
+        )
+    }
 }
 
 export default Chat

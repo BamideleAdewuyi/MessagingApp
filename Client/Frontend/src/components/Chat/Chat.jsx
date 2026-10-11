@@ -41,8 +41,8 @@ function Chat({ chatId }) {
             <div className={styles.chatContainer}>
                 <div className={styles.messagesContainer}>
                     {messages.map((message, index) => (
-                        <div className={styles.messageContainer}>
-                            <Message key={index} message={message}/>
+                        <div key={index}  className={styles.messageContainer}>
+                            <Message message={message}/>
                         </div>
                     ))}
                 </div>

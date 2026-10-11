@@ -1,0 +1,15 @@
+.messageContainer {
+    display: flex;
+    flex-direction: column;
+    outline: 1px solid black;
+    padding: 3%;
+    border-radius: 13%;
+}
+
+.me {
+    align-self: flex-end;
+}
+
+.them {
+    align-self: flex-start;
+}

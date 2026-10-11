@@ -40,10 +40,10 @@ function App() {
 
   if (!isLoading) {
     return (
-      <>
+      <div className='container'>
         <Navbar user={user} setUser={setUser} />
         <Outlet context={{ user, setUser }}/>
-      </>
+      </div>
     )
   } else {
 

@@ -1,6 +1,7 @@
 const db = require("../db/queries");
 const { validationResult, matchedData } = require("express-validator");
 const validateMessage = require("../validators/messageValidator");
+const { use } = require("passport");
 
 function asyncHandler(fn) {
   return function (req, res, next) {
@@ -29,6 +30,19 @@ const newMessagePost = [
     })
 ]
 
+async function messageByIdGet(req, res) {
+  const userId = Number(req.user.id);
+  const messageId = Number(req.params.messageId);
+
+  const message = await db.findMessageById({ messageId });
+  if (message.authorId == userId) {
+    res.json({ message: message });
+  } else {
+    res.json({ msg: "Not authorised" });
+  }
+}
+
 module.exports = {
     newMessagePost,
+    messageByIdGet,
 }

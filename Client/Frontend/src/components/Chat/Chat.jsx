@@ -1,10 +1,15 @@
 import styles from "./Chat.module.css"
 import Message from "../Message/Message"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 
 function Chat({ chatId, refreshKey }) {
     const [isLoading, setIsLoading] = useState(true);
     const [messages, setMessages] = useState(null);
+    const messagesBottom = useRef();
+
+    useEffect(() => {
+        messagesBottom.current?.scrollIntoView({ behavior: "auto" })
+    }, [messages]);
 
     useEffect(() => {
         async function getMessages() {
@@ -42,6 +47,7 @@ function Chat({ chatId, refreshKey }) {
                 {messages.map((message, index) => (
                     <Message key={index} message={message}/>
                 ))}
+                <div ref={messagesBottom}/>
             </div>
         )
     } else {

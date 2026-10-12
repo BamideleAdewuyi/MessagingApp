@@ -11,6 +11,7 @@ function Chats() {
     const [open, setOpen] = useState(false);
     const [contacts, setContacts] = useState([]);
     const [selectedChat, setSelectedChat] = useState(null);
+    const [refreshKey, setRefreshKey] = useState(false);
 
     useEffect(() => {
         async function getChats() {
@@ -26,7 +27,7 @@ function Chats() {
 
                 if (res.ok) {
                     setChats(data.chats);
-                    setSelectedChat(data.chats[0].id);
+                    !selectedChat && setSelectedChat(data.chats[0].id);
                     setIsLoading(false);
                 } else {
                     setIsLoading(false);
@@ -41,7 +42,7 @@ function Chats() {
             }
         }
         getChats();
-    }, []);
+    }, [refreshKey]);
 
     useEffect(() => {
         async function getContacts() {
@@ -108,7 +109,7 @@ function Chats() {
                             <button type="submit">Send</button>
                         </form>
                     </div>
-                    <NewChatBox open={open} toggleNewChatBox={toggleNewChatBox} contacts={contacts} setSelectedChat={setSelectedChat} />
+                    <NewChatBox open={open} toggleNewChatBox={toggleNewChatBox} contacts={contacts} setSelectedChat={setSelectedChat} setRefreshKey={setRefreshKey} />
                 </div>
             </div>
         )

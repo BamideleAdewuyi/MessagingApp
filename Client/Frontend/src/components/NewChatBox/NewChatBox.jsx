@@ -1,7 +1,7 @@
 import styles from "./NewChatBox.module.css"
 import { useRef, useEffect, useState } from "react";
 
-function NewChatBox({ open, contacts, toggleNewChatBox, setSelectedChat }) {
+function NewChatBox({ open, contacts, toggleNewChatBox, setSelectedChat, setRefreshKey }) {
     const dialogRef = useRef();
     const [recipient, setRecipient] = useState("");
     const [message, setMessage] = useState("");
@@ -103,12 +103,14 @@ function NewChatBox({ open, contacts, toggleNewChatBox, setSelectedChat }) {
                     if (data.chat) {
                         const chatId = Number(data.chat.id);
                         await addMessageToChat(chatId);
+                        setRefreshKey(prev => !prev);
                         setSelectedChat(chatId);
                         toggleNewChatBox();
                         return
                     } else {
                         const chatId = await createNewChat(activeRecipientId);
                         await addMessageToChat(Number(chatId));
+                        setRefreshKey(prev => !prev);
                         setSelectedChat(Number(chatId));
                         toggleNewChatBox();
                         return;

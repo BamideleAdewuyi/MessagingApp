@@ -97,7 +97,7 @@ function Chats() {
                         ))}
                     </div>
                     <div className={styles.selectedChat}>
-                        <Chat chatId={selectedChat}/>
+                        <Chat chatId={selectedChat} refreshKey={refreshKey}/>
                     </div>
                 </div>
                 <div className={styles.newMessageContainer}>

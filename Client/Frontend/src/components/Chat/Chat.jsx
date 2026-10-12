@@ -2,7 +2,7 @@ import styles from "./Chat.module.css"
 import Message from "../Message/Message"
 import { useState, useEffect } from "react"
 
-function Chat({ chatId }) {
+function Chat({ chatId, refreshKey }) {
     const [isLoading, setIsLoading] = useState(true);
     const [messages, setMessages] = useState(null);
 
@@ -35,7 +35,7 @@ function Chat({ chatId }) {
             }
         }
         getMessages();
-    }, [chatId]);
+    }, [chatId, refreshKey]);
     if (!isLoading && messages.length > 0) {
         return(
             <div className={styles.chatContainer}>

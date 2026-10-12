@@ -12,6 +12,7 @@ function Chats() {
     const [contacts, setContacts] = useState([]);
     const [selectedChat, setSelectedChat] = useState(null);
     const [refreshKey, setRefreshKey] = useState(false);
+    const [message, setMessage] = useState("");
 
     useEffect(() => {
         async function getChats() {
@@ -74,6 +75,34 @@ function Chats() {
         getContacts();
     }, [])
 
+    async function sendMessage(e) {
+        e.preventDefault();
+
+        const token = localStorage.getItem("token");
+        const messageObj = { message, chatId: selectedChat };
+        try {
+            const res = await fetch(`${import.meta.env.VITE_API_PORT}/newMessage`, {
+                        method: "POST",
+                        body: JSON.stringify(messageObj),
+                        headers: { "Authorization": `Bearer ${token}`, "content-type": "application/json" },
+            });
+
+            const data = await res.json();
+            console.log(data)
+            if (res.ok) {
+                if (data.newMessage) {
+                    setRefreshKey(prev => !prev);
+                    setMessage("");
+                    return;
+                } else {
+                    console.log(data.errors);
+                }
+            }
+        } catch(error) {
+            console.log(error);
+        }
+    }
+
     function toggleNewChatBox() {
         if (open) {
             setOpen(false);
@@ -103,9 +132,9 @@ function Chats() {
                 <div className={styles.newMessageContainer}>
                     <button type="button" onClick={() => toggleNewChatBox()}>New Chat</button>
                     <div className={styles.newMessageFormContainer}>
-                        <form className={styles.newMessageForm}>
+                        <form onSubmit={(e) => sendMessage(e)} className={styles.newMessageForm}>
                             <label htmlFor="message">Message</label>
-                            <textarea className={styles.newMessageInput} type="text" name="message" />
+                            <textarea className={styles.newMessageInput} type="text" name="message" value={message} onChange={(e) => setMessage(e.target.value)} />
                             <button type="submit">Send</button>
                         </form>
                     </div>

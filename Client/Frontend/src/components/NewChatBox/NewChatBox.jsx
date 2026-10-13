@@ -127,11 +127,11 @@ function NewChatBox({ open, contacts, toggleNewChatBox, setSelectedChat, setRefr
 
     return(
         <div className={styles.newChatBoxContainer}>
-            <dialog ref={dialogRef}>
-                <form onSubmit={(e) => sendMessage(e)}>
+            <dialog className={styles.newChatBoxDialog} ref={dialogRef}>
+                <form className={styles.newChatBoxForm} onSubmit={(e) => sendMessage(e)}>
                     <h1>Start a new chat</h1>
                     <label htmlFor="message">Write message</label>
-                    <input type="text" name="message" value={message} onChange={(e) => setMessage(e.target.value)}/>
+                    <textarea className={styles.newChatBoxMessageInput} type="text" name="message" value={message} onChange={(e) => setMessage(e.target.value)}/>
                     <label htmlFor="contacts">Choose a contact</label>
                     <input list="contacts" name="contacts" value={recipient} onChange={(e) => setRecipient(e.target.value)} />
                     <datalist id="contacts">

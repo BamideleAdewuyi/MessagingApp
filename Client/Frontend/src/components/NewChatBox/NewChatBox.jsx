@@ -1,10 +1,13 @@
 import styles from "./NewChatBox.module.css"
 import { useRef, useEffect, useState } from "react";
+import { useOutletContext } from "react-router";
 
-function NewChatBox({ open, contacts, toggleNewChatBox, setSelectedChat, setRefreshKey }) {
+function NewChatBox({ open, contacts, toggleNewChatBox, setSelectedChat, setRefreshKey, setErrors }) {
     const dialogRef = useRef();
     const [recipient, setRecipient] = useState("");
     const [message, setMessage] = useState("");
+    const {user} = useOutletContext();
+    const userId = user.id;
 
     useEffect(() => {
         if (dialogRef.current) {
@@ -55,7 +58,7 @@ function NewChatBox({ open, contacts, toggleNewChatBox, setSelectedChat, setRefr
                 console.log(data.msg);
                 return data.newChat.id;
             } else {
-                console.log(data.errors);
+                setErrors(data.errors.map((error) => error.msg));
                 return;
             }
 
@@ -78,7 +81,7 @@ function NewChatBox({ open, contacts, toggleNewChatBox, setSelectedChat, setRefr
                 console.log(data.msg);
                 return;
             } else {
-                console.log(data.errors);
+                setErrors(data.errors.map((error) => error.msg));
                 return;
             }
 
@@ -90,6 +93,16 @@ function NewChatBox({ open, contacts, toggleNewChatBox, setSelectedChat, setRefr
     async function sendMessage(e) {
         e.preventDefault();
         const activeRecipientId = await getRecipientId();
+        if (!activeRecipientId) {
+            setErrors(["No recipient selected"]);
+            toggleNewChatBox();
+            return;
+        }
+        if (Number(activeRecipientId) == Number(userId)) {
+            setErrors(["Cannot send to self"])
+            toggleNewChatBox();
+            return;
+        }
         try {
             const token = localStorage.getItem("token");
             if (token) {
@@ -116,8 +129,7 @@ function NewChatBox({ open, contacts, toggleNewChatBox, setSelectedChat, setRefr
                         return;
                     }
                 } else {
-                    console.log("Failed");
-                    toggleNewChatBox();
+                    setErrors(data.errors.map((error) => error.msg));
                 }
             }
         } catch (error) {

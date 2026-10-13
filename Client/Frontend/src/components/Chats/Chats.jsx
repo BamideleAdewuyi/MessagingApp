@@ -30,7 +30,7 @@ function Chats() {
 
                 if (res.ok) {
                     setChats(data.chats);
-                    !selectedChat && setSelectedChat(data.chats[0].id);
+                    !selectedChat && data.chats.length > 0 && setSelectedChat(data.chats[0].id);
                     setIsLoading(false);
                 } else {
                     setIsLoading(false);

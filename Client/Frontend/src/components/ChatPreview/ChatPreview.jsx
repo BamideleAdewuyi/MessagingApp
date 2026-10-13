@@ -38,7 +38,7 @@ function ChatPreview({ chat, handleClick, selectedChat }) {
         return(
             <div style={Number(chatId) == Number(selectedChat) ? {fontWeight: "bold"} : {fontWeight: "normal"}} className={styles.chatPreviewContainer} onClick={() => handleClick(chatId)}>
                 <h1>{recipientName}</h1>
-                <p>{message.message}</p>
+                <p>{message?.message || "No messages yet"}</p>
             </div>
         )
     } else {

@@ -118,7 +118,7 @@ function Chats() {
         setSelectedChat(chatId);
     }
 
-    if (!isLoading && selectedChat) {
+    if (!isLoading) {
         return(
             <div className={styles.chatsAndPreviewsContainer}>
                 <div className={styles.chatsContainer}>
@@ -129,7 +129,7 @@ function Chats() {
                         ))}
                     </div>
                     <div className={styles.selectedChat}>
-                        <Chat chatId={selectedChat} refreshKey={refreshKey}/>
+                        {selectedChat && <Chat chatId={selectedChat}/>}
                     </div>
                 </div>
                 {errors.length > 0 && 

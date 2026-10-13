@@ -129,7 +129,7 @@ function Chats() {
                         ))}
                     </div>
                     <div className={styles.selectedChat}>
-                        {selectedChat && <Chat chatId={selectedChat}/>}
+                        {selectedChat && <Chat chatId={selectedChat} refreshKey={refreshKey}/>}
                     </div>
                 </div>
                 {errors.length > 0 && 
@@ -142,14 +142,14 @@ function Chats() {
                     </> }
                 <div className={styles.newMessageContainer}>
                     <button type="button" onClick={() => toggleNewChatBox()}>New Chat</button>
-                    <div className={styles.newMessageFormContainer}>
+                    <NewChatBox open={open} toggleNewChatBox={toggleNewChatBox} contacts={contacts} setSelectedChat={setSelectedChat} setRefreshKey={setRefreshKey} setErrors={setErrors} />
+                    {selectedChat && <div className={styles.newMessageFormContainer}>
                         <form onSubmit={(e) => sendMessage(e)} className={styles.newMessageForm}>
                             <label htmlFor="message">Message</label>
                             <textarea className={styles.newMessageInput} type="text" name="message" value={message} onChange={(e) => setMessage(e.target.value)} />
                             <button type="submit">Send</button>
                         </form>
-                    </div>
-                    <NewChatBox open={open} toggleNewChatBox={toggleNewChatBox} contacts={contacts} setSelectedChat={setSelectedChat} setRefreshKey={setRefreshKey} setErrors={setErrors} />
+                    </div>}
                 </div>
             </div>
         )

@@ -3,6 +3,7 @@ import Chat from "../Chat/Chat"
 import NewChatBox from "../NewChatBox/NewChatBox"
 import ChatPreview from "../ChatPreview/ChatPreview"
 import { useState, useEffect } from "react"
+import Error from "../Error/Error";
 
 function Chats() {
 
@@ -13,6 +14,7 @@ function Chats() {
     const [selectedChat, setSelectedChat] = useState(null);
     const [refreshKey, setRefreshKey] = useState(false);
     const [message, setMessage] = useState("");
+    const [errors, setErrors] = useState([]);
 
     useEffect(() => {
         async function getChats() {
@@ -89,15 +91,16 @@ function Chats() {
 
             const data = await res.json();
             console.log(data)
-            if (res.ok) {
-                if (data.newMessage) {
-                    setRefreshKey(prev => !prev);
-                    setMessage("");
-                    return;
-                } else {
-                    console.log(data.errors);
-                }
+
+            if (data.newMessage) {
+                setRefreshKey(prev => !prev);
+                setMessage("");
+                return;
+            } else {
+                console.log("dawg: ",data.errors);
+                setErrors(data.errors.map((error) => error.msg));
             }
+
         } catch(error) {
             console.log(error);
         }
@@ -129,6 +132,14 @@ function Chats() {
                         <Chat chatId={selectedChat} refreshKey={refreshKey}/>
                     </div>
                 </div>
+                {errors.length > 0 && 
+                    <>
+                        <ul>
+                            {errors.map((error, index) => (
+                                    <li key={index}><Error error={error} /></li>
+                                ))}
+                        </ul>
+                    </> }
                 <div className={styles.newMessageContainer}>
                     <button type="button" onClick={() => toggleNewChatBox()}>New Chat</button>
                     <div className={styles.newMessageFormContainer}>
@@ -138,7 +149,7 @@ function Chats() {
                             <button type="submit">Send</button>
                         </form>
                     </div>
-                    <NewChatBox open={open} toggleNewChatBox={toggleNewChatBox} contacts={contacts} setSelectedChat={setSelectedChat} setRefreshKey={setRefreshKey} />
+                    <NewChatBox open={open} toggleNewChatBox={toggleNewChatBox} contacts={contacts} setSelectedChat={setSelectedChat} setRefreshKey={setRefreshKey} setErrors={setErrors} />
                 </div>
             </div>
         )

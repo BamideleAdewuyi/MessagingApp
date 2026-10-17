@@ -43,7 +43,7 @@ async function newChatPost(req, res) {
   return res.status(201).json({
     msg: "Chat created",
     newChat: newChat,
-  })
+  });
 }
 
 async function recipientByChatIdGet(req, res) {
@@ -60,4 +60,4 @@ module.exports = {
     chatByChatIdGet,
     newChatPost,
     recipientByChatIdGet,
-}
+};

@@ -5,7 +5,7 @@ const router = require("./routes/index.js");
 const cors = require('cors');
 const app = express();
 
-require('./passport/passport.js')
+require('./passport/passport.js');
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -27,5 +27,5 @@ app.listen(PORT, (error) => {
     if (error) {
         throw error;
     }
-    console.log(`App up and running on ${PORT}`)
+    console.log(`App up and running on ${PORT}`);
 });

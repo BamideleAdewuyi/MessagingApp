@@ -4,7 +4,7 @@ const db = require("../db/queries");
 const messageBlankErr = "cannot be blank";
 const lengthErr = "cannot be more than 6000 characters";
 const recipientErr = "Must have recipient";
-const invalidChatErr = "Invalid chat"
+const invalidChatErr = "Invalid chat";
 
 const validateMessage = [
     body("message").trim()

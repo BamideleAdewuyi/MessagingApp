@@ -1,18 +1,20 @@
 {
   "name": "messagingapp",
   "version": "1.0.0",
+  "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
-"dependencies": {
+  "dependencies": {
     "@prisma/adapter-pg": "^7.10.0",
     "@prisma/client": "^7.10.0",
-    "prisma": "^7.10.0",
     "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.3",
     "cors": "^2.8.6",
@@ -25,6 +27,12 @@
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",
-    "pg": "^8.23.0"
+    "pg": "^8.23.0",
+    "prisma": "^7.10.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.13.0",
+    "eslint": "^10.13.0",
+    "globals": "^15.15.0"
   }
 }

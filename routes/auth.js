@@ -17,7 +17,7 @@ authRouter.post('/login', function (req, res, next) {
            }
            const userObj = { 
             id: user.id
-           }
+           };
            const token = jwt.sign(userObj, process.env.JWT_SECRET || process.env.SECRET);
            return res.json({user, token});
         });
@@ -25,4 +25,4 @@ authRouter.post('/login', function (req, res, next) {
 });
 authRouter.post("/validate", passport.authenticate('jwt', {session: false}), (req, res) => res.json(req.user));
 
-module.exports = authRouter
+module.exports = authRouter;

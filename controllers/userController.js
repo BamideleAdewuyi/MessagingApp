@@ -32,7 +32,7 @@ const newUserPost = [
     if (!errors.isEmpty()) {
       return res.status(400).json({
         errors: errors.array()
-      })
+      });
     }
     
     const { username, password } = matchedData(req);
@@ -41,12 +41,12 @@ const newUserPost = [
     await db.createNewUser({ username, password: hashedPassword });
     return res.status(201).json({
       msg: "User created successfully"
-    })
+    });
   })
-]
+];
 
 module.exports = {
     userGet,
     userByUserNameGet,
     newUserPost,
-}
+};

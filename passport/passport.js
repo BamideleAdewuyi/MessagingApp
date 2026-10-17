@@ -32,7 +32,7 @@ passport.use(new JWTStrategy({
         secretOrKey: process.env.JWT_SECRET || process.env.SECRET
     },
     async function (jwtPayload, cb) {
-        try {const userId = Number(jwtPayload.id)
+        try {const userId = Number(jwtPayload.id);
         const user = await db.findUserById({ userId });
         cb(null, user);
         } catch(err) {
@@ -57,4 +57,4 @@ passport.deserializeUser(async (id, done) => {
 
 module.exports = {
     passport
-}
+};

@@ -125,4 +125,4 @@ module.exports = {
     findMessageById,
     createNewMessage,
     createNewChat,
-}
+};

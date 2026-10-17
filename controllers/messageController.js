@@ -16,7 +16,7 @@ const newMessagePost = [
         if (!errors.isEmpty()) {
           return res.status(400).json({
             errors: errors.array()
-          })
+          });
         }
         
         const { message, chatId } = matchedData(req);
@@ -26,9 +26,9 @@ const newMessagePost = [
         return res.status(201).json({
           msg: "Message created",
           newMessage: newMessage,
-        })
+        });
     })
-]
+];
 
 async function messageByIdGet(req, res) {
   const userId = Number(req.user.id);
@@ -45,4 +45,4 @@ async function messageByIdGet(req, res) {
 module.exports = {
     newMessagePost,
     messageByIdGet,
-}
+};
